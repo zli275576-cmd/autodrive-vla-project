@@ -12,24 +12,29 @@ class ProjectConfig(BaseModel):
 class DataConfig(BaseModel):
     dataset_name: str = "toy-driving-vla"
     split: str = "train"
-    observation_shape: tuple[int, int, int] = (224, 224, 3)
+    observation_shape: tuple[int, int, int] = (64, 64, 3)
     vehicle_state_dim: int = 4
     action_dim: int = 3
+    train_samples: int = 512
+    eval_samples: int = 128
 
 
 class ModelConfig(BaseModel):
-    name: str = "toy-driving-vla-model"
+    name: str = "driving-vla-baseline"
     hidden_dim: int = 128
+    text_embedding_dim: int = 32
 
 
 class TrainConfig(BaseModel):
-    batch_size: int = 8
-    learning_rate: float = 1e-4
-    max_steps: int = 100
+    batch_size: int = 32
+    learning_rate: float = 1e-3
+    max_steps: int = 200
+    checkpoint_path: str = "outputs/checkpoints/driving_vla_baseline.pt"
 
 
 class EvalConfig(BaseModel):
-    episodes: int = 5
+    episodes: int = 128
+    checkpoint_path: str = "outputs/checkpoints/driving_vla_baseline.pt"
 
 
 class ExperimentConfig(BaseModel):

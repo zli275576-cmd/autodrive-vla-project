@@ -5,18 +5,23 @@ project:
 data:
   dataset_name: toy-driving-vla
   split: train
-  observation_shape: [224, 224, 3]
+  observation_shape: [64, 64, 3]
   vehicle_state_dim: 4
   action_dim: 3
+  train_samples: 512
+  eval_samples: 128
 
 model:
-  name: toy-driving-vla-model
+  name: driving-vla-baseline
   hidden_dim: 128
+  text_embedding_dim: 32
 
 train:
-  batch_size: 8
-  learning_rate: 0.0001
-  max_steps: 100
+  batch_size: 32
+  learning_rate: 0.001
+  max_steps: 200
+  checkpoint_path: outputs/checkpoints/driving_vla_baseline.pt
 
 eval:
-  episodes: 5
+  episodes: 128
+  checkpoint_path: outputs/checkpoints/driving_vla_baseline.pt
